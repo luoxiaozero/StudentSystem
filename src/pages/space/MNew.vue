@@ -163,7 +163,7 @@ import MNewCard from "./MNewCard.vue";
 import axiosApi from "../../axios";
 const message = useMessage();
 ref: selectDateRange = [Date.now(), Date.now() + 15768000] as [number, number];
-ref: selectTeacher = undefined;
+ref: selectTeacher = undefined as any;
 ref: courseName = "";
 ref: sdeptName = "";
 const newSdept = (closeModel: Function) => {
@@ -192,7 +192,7 @@ const teacherInfo = reactive<{
         value: string
     }>
 }[]>([]);
-ref: selectAllTeam = undefined;
+ref: selectAllTeam = undefined as any;
 const teamAllInfo = reactive<{
     type: 'group',
     label: string,

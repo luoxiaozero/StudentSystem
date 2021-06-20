@@ -1,6 +1,6 @@
 <template>
     <n-layout-header class="nav" bordered>
-        <n-button text tag="a" href="/space">
+        <n-button text @click="jumpSpace">
             <template #icon>
                 <n-icon>
                     <cloud-outline-icon />
@@ -39,6 +39,9 @@ import { LogInOutline as LogInOutlineIcon, CloudOutline as CloudOutlineIcon, Pri
 import router from "../router";
 import store from "../store";
 import { theme } from '../store';
+const jumpSpace = () => {
+    router.push("/space");
+}
 const changeTheme = () => {
     if (theme.value != null) {
         theme.value = null;
