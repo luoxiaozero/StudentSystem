@@ -1,18 +1,6 @@
 <template>
     <n-layout style="height: 100vh;">
-        <n-layout-header
-            style="height: 54px; display: flex;align-items: center; padding: 0 20px ;"
-            bordered
-        >
-            <n-button text tag="a" href="/" style="float: right;">
-                <template #icon>
-                    <n-icon>
-                        <train-icon />
-                    </n-icon>
-                </template>
-                退出
-            </n-button>
-        </n-layout-header>
+        <the-header />
         <n-layout position="absolute" style="top: 54px; " has-sider>
             <n-layout-sider
                 bordered
@@ -49,15 +37,13 @@
 </template>
 
 <script lang="ts" setup>
-import { NLayout, NMenu, NLayoutSider, NLayoutHeader, NButton } from "naive-ui";
+import { NLayout, NMenu, NLayoutSider, NIcon } from "naive-ui";
+import TheHeader from "../../components/TheHeader.vue"
 import MNew from "./MNew.vue";
 import MCourse from "./MCourse.vue";
 import TCourse from "./TCourse.vue";
 import MTeam from "./MTeam.vue";
 import SGrade from "./SGrade.vue";
-import { TrainOutline as TrainIcon } from '@vicons/ionicons5'
-import { h, reactive } from 'vue'
-import { NIcon } from 'naive-ui'
 import {
     BookOutline as BookIcon,
     PersonOutline as PersonIcon,
@@ -160,4 +146,5 @@ ref: collapsed = false;
 // import { MenuOption } from "naive-ui";
 import axiosApi from "../../axios";
 import store from "../../store";
+import { h, reactive } from 'vue'
 </script>

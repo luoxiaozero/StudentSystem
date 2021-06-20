@@ -150,11 +150,11 @@ Mock.mock("/api/student?classId=3", {
   data: [
     {
       id: 2020020000,
-      name: "张三w",
+      name: "Sorrow",
     },
     {
       id: 2020020000,
-      name: "李四",
+      name: "Time",
     },
   ],
 });

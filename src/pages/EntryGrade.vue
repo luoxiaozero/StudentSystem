@@ -1,8 +1,8 @@
 <template>
-    <n-layout>
+    <n-layout >
         <the-header />
     </n-layout>
-    <n-layout :native-scrollbar="false">
+    <n-layout :native-scrollbar="false" style="min-height: 100vh;">
         <n-card :title="courseName">
             <n-data-table :columns="columns" :data="grades" />
         </n-card>

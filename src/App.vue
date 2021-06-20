@@ -1,10 +1,13 @@
 <template>
-  <n-message-provider>
-    <router-view></router-view>
-  </n-message-provider>
+  <n-config-provider :theme="theme">
+    <n-message-provider>
+      <router-view></router-view>
+    </n-message-provider>
+  </n-config-provider>
 </template>
 <script lang="ts" setup>
-import { NMessageProvider } from 'naive-ui';
+import { NMessageProvider, NConfigProvider } from 'naive-ui';
+import { theme } from './store';
 </script>
 
 
