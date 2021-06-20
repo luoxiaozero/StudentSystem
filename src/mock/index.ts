@@ -186,6 +186,12 @@ Mock.mock("/api/admin/course", {
       endYear: 1624107702406,
       teacherName: "张三",
     },
+    {
+      courseName: "英语",
+      beginYear: 1600520530000,
+      endYear: 1624107702406,
+      teacherName: "beatles",
+    }
   ],
 });
 
@@ -234,5 +240,30 @@ Mock.mock("/api/course/1/grade", {
 
 
 Mock.mock("/api/course/grade/update", {
+  code: 200,
+});
+
+Mock.mock("/api/teacher", {
+  code: 200,
+  data: [
+    {
+      id: 1,
+      name: "jojo",
+      sdeptName: "计算机系",
+    },
+    {
+      id: 3,
+      name: "s-zhsdd",
+      sdeptName: "计算机系",
+    },
+    {
+      id: 4,
+      name: "beatles",
+      sdeptName: "英语系",
+    }
+  ]}
+);
+
+Mock.mock("/api/course/create", {
   code: 200,
 });

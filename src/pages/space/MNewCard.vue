@@ -11,7 +11,7 @@
     <n-modal
         v-model:show="isShowModel"
         preset="card"
-        :style="{ width: '400px', borderRadius: '10px' }"
+        :style="{ width: props.modelWidth, borderRadius: '10px' }"
         :title="props.title"
         size="huge"
         :bordered="false"
@@ -30,6 +30,10 @@ const props = defineProps({
     title: {
         type: String,
     },
+    modelWidth: {
+        type: String,
+        default: "400px"
+    }
 });
 ref: isShowModel = false;
 const openModel = () => {

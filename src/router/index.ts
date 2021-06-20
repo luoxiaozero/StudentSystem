@@ -13,7 +13,8 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory('/StudentSystem/'),
+  history: createWebHistory(),
+  // history: createWebHistory('/StudentSystem/'), // 静态页面配置
   routes,
 });
 

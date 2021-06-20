@@ -1,13 +1,41 @@
 <template>
     <n-card title="新建课堂" class="n-card-user">
         <n-grid x-gap="12" :cols="4">
-            <m-new-card title="新建必修">
+            <m-new-card
+                title="新建必修"
+                model-width="460px"
+                @open-model="openCourse"
+                @confirm="newCourse"
+            >
                 <template #icon>
                     <book-icon />
                 </template>
                 <template #model>
-                    <n-input placeholder="请输入课程名" clearable style="margin-bottom: 16px;"/>
-                    <n-date-picker v-model:value="range" type="daterange" clearable />
+                    <n-input
+                        placeholder="请输入课程名"
+                        v-model:value="courseName"
+                        clearable
+                        style="margin-bottom: 16px;"
+                    />
+                    <n-date-picker
+                        v-model:value="selectDateRange"
+                        type="daterange"
+                        clearable
+                        style="margin-bottom: 16px;"
+                    />
+                    <n-select
+                        filterable
+                        v-model:value="selectTeacher"
+                        :options="teacherInfo"
+                        placeholder="请选择教工"
+                        style="margin-bottom: 16px;"
+                    />
+                    <n-select
+                        multiple
+                        v-model:value="selectAllTeam"
+                        :options="teamAllInfo"
+                        placeholder="请选择班级"
+                    />
                 </template>
             </m-new-card>
         </n-grid>
@@ -134,7 +162,9 @@ import { BusinessOutline, BookOutline as BookIcon, PersonOutline, TennisballOutl
 import MNewCard from "./MNewCard.vue";
 import axiosApi from "../../axios";
 const message = useMessage();
-ref: range = [Date.now(), Date.now() + 1000] as [number, number];
+ref: selectDateRange = [Date.now(), Date.now() + 15768000] as [number, number];
+ref: selectTeacher = undefined;
+ref: courseName = "";
 ref: sdeptName = "";
 const newSdept = (closeModel: Function) => {
     if (!sdeptName || sdeptName == "") {
@@ -153,6 +183,121 @@ const newSdept = (closeModel: Function) => {
 const sdeptInfo = reactive<{ "value": number, label: string }[]>([]);
 const majorInfo = reactive<{ "value": number, label: string }[]>([]);
 const teamInfo = reactive<{ "value": number, label: string }[]>([]);
+const teacherInfo = reactive<{
+    type: 'group',
+    label: string,
+    key: string,
+    children: Array<{
+        label: string,
+        value: string
+    }>
+}[]>([]);
+ref: selectAllTeam = undefined;
+const teamAllInfo = reactive<{
+    type: 'group',
+    label: string,
+    key: string,
+    children: Array<any>
+}[]>([]);
+const openCourse = () => {
+    axiosApi.get("/sdept").then(res => {
+        if (res.code == 200) {
+            teamAllInfo.length = 0;
+            res.data.forEach((element: { id: number, name: string }) => {
+                let _sdept = element;
+                axiosApi.get("/major", { sdeptId: element.id }).then(res => {
+                    if (res.code == 200) {
+                        res.data.forEach((element: { id: number, name: string }) => {
+                            let _major: {
+                                type: 'group',
+                                label: string,
+                                key: string,
+                                children: Array<any>
+                            } = { type: 'group', label: _sdept.name + " " + element.name, key: "major-" + _sdept.id.toString() + element.id.toString(), children: [] };
+                            axiosApi.get("/class", { majorId: element.id }).then(res => {
+                                if (res.code == 200) {
+                                    res.data.forEach((element: { id: number, name: string, graduationYear: string }) => {
+                                        let team = {
+                                            value: _major.key + "-" + element.id.toString(),
+                                            label: element.name,
+                                        }
+                                        _major.children.push(team)
+                                    });
+                                }
+                            });
+                            teamAllInfo.push(_major);
+                        });
+                    }
+                });
+
+            });
+        }
+    });
+
+    axiosApi.get("/teacher").then(res => {
+        if (res.code == 200) {
+            const sdepts = new Map<string, any>();
+            res.data.forEach((element: {
+                id: number,
+                name: string,
+                sdeptName: string
+            }) => {
+                if (sdepts.has(element.sdeptName)) {
+                    sdepts.get(element.sdeptName).children.push({
+                        label: element.name,
+                        value: element.id
+                    })
+                } else {
+                    sdepts.set(element.sdeptName, {
+                        type: 'group',
+                        label: element.sdeptName,
+                        key: element.sdeptName,
+                        children: [{
+                            label: element.name,
+                            value: element.id
+                        }]
+                    });
+                }
+                teacherInfo.length = 0;
+                sdepts.forEach(el => {
+                    teacherInfo.push(el);
+                })
+                console.log(teacherInfo)
+            });
+        }
+    })
+}
+
+const newCourse = (closeModel: Function) => {
+    if (!courseName) {
+        message.error("课程名不能为空");
+        return;
+    }
+    if (!selectTeacher) {
+        message.error("教工不能为空");
+        return;
+    }
+    if (!selectAllTeam) {
+        message.error("班级不能为空");
+        return;
+    }
+    console.log(selectAllTeam, selectTeacher, courseName, selectDateRange);
+    let classIds: number[] = [];
+    (selectAllTeam as unknown as string[]).forEach(element => {
+        classIds.push(parseInt(element.split("-")[2]));
+    });
+    axiosApi.post("/course/create", {
+        name: courseName,
+        teacherId: selectTeacher,
+        beginDate: selectDateRange[0],
+        endDate:selectDateRange[1],
+        classIds
+    }).then(res => {
+        if (res.code == 200) {
+            closeModel();
+        }
+    })
+}
 const openMajor = () => {
     selectSdept = undefined;
     getSdept();
