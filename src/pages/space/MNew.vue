@@ -190,9 +190,9 @@ const getTeam = () => {
     });
 }
 ref: majorName = "";
-ref: selectSdept = undefined;
-ref: selectMajor = undefined;
-ref: selectTeam = undefined;
+ref: selectSdept = undefined as any;
+ref: selectMajor = undefined as any;
+ref: selectTeam = undefined as any;
 const newMajor = (closeModel: Function) => {
     if (!selectSdept) {
         message.error("系部不能为空");
