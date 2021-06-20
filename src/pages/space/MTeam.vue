@@ -1,17 +1,16 @@
 <template>
     <!-- <n-button>导出成绩</n-button> -->
-    <n-data-table :columns="columns" :data="data" :bordered="false" />
+    <n-data-table :columns="columns" :data="data" />
 </template>
 <script lang="ts" setup>
 import { defineProps, reactive, watch } from 'vue'
-import { NTag, NButton, NDataTable, } from 'naive-ui';
+import { NDataTable, } from 'naive-ui';
 import axiosApi from '../../axios';
 const props = defineProps({
     teamId: {
         type: Number
     }
 })
-
 
 const getDate = () => {
     axiosApi.get("/student", { classId: props.teamId }).then(res => {
@@ -24,6 +23,8 @@ const getDate = () => {
                     name: element.name,
                 });
             });
+        } else {
+            
         }
     })
 }

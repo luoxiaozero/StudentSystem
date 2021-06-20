@@ -9,6 +9,7 @@ const routes = [
   { path: "/login", component: LoginVue },
   { path: "/space", component: SpaceVue },
   { path: "/course/:cid/grade/entry", component: EntryGradeVue },
+  { path: "/500", component: ResultPageVue, name: "500" },
   { path: "/:catchAll(.*)", component: ResultPageVue },
 ];
 

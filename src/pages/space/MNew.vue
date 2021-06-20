@@ -1,6 +1,6 @@
 <template>
     <n-card title="新建课堂" class="n-card-user">
-        <n-grid x-gap="12" :cols="4">
+        <n-grid x-gap="12" y-gap="5" cols="1 300:2 500:3 900:4 1100:5">
             <m-new-card
                 title="新建必修"
                 model-width="460px"
@@ -41,7 +41,7 @@
         </n-grid>
     </n-card>
     <n-card title="新建组织" class="n-card-user">
-        <n-grid x-gap="12" :cols="4">
+        <n-grid x-gap="12" y-gap="5" cols="1 300:2 500:3 900:4 1100:5">
             <m-new-card title="新建系部" @confirm="newSdept">
                 <template #icon>
                     <business-outline />
@@ -96,7 +96,7 @@
     </n-card>
 
     <n-card title="新建人员" class="n-card-user">
-        <n-grid x-gap="12" :cols="4">
+        <n-grid x-gap="12" y-gap="5" cols="1 300:2 500:3 900:4 1100:5">
             <m-new-card title="新建教工" @open-model="openTeacher" @confirm="newTeacher">
                 <template #icon>
                     <person-outline />
@@ -290,11 +290,14 @@ const newCourse = (closeModel: Function) => {
         name: courseName,
         teacherId: selectTeacher,
         beginDate: selectDateRange[0],
-        endDate:selectDateRange[1],
+        endDate: selectDateRange[1],
         classIds
     }).then(res => {
         if (res.code == 200) {
             closeModel();
+            message.success(res.msg || "成功");
+        } else {
+            message.error(res.msg || "error");
         }
     })
 }
@@ -353,8 +356,10 @@ const newMajor = (closeModel: Function) => {
         sdeptId: selectSdept,
     }).then(res => {
         if (res.code == 200) {
-            message.success("新建专业成功");
             closeModel();
+            message.success(res.msg || "成功");
+        } else {
+            message.error(res.msg || "error");
         }
     })
 }
@@ -405,8 +410,10 @@ const newTeam = (closeModel: Function) => {
     }
     axiosApi.post("/class/create", { name: teamName, graduationYear, majorId: selectMajor }).then(res => {
         if (res.code == 200) {
-            message.success("新建班级成功");
             closeModel();
+            message.success(res.msg || "成功");
+        } else {
+            message.error(res.msg || "error");
         }
     });
 }
@@ -435,8 +442,10 @@ const newTeacher = (closeModel: Function) => {
     }
     axiosApi.post("/teacher/create", { name: teacherName, id: parseInt(teacherId), sdeptId: selectSdept }).then(res => {
         if (res.code == 200) {
-            message.success("新建教工成功");
             closeModel();
+            message.success(res.msg || "成功");
+        } else {
+            message.error(res.msg || "error");
         }
     });
 }
@@ -467,8 +476,10 @@ const newStudent = (closeModel: Function) => {
     }
     axiosApi.post("/student/create", { name: studentName, id: parseInt(studentId), sdeptId: selectSdept, majorId: selectMajor, classId: selectTeam }).then(res => {
         if (res.code == 200) {
-            message.success("新建学生成功");
             closeModel();
+            message.success(res.msg || "成功");
+        } else {
+            message.error(res.msg || "error");
         }
     });
 }

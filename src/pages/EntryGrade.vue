@@ -46,6 +46,9 @@ const confirm = () => {
         if (res.code == 200) {
             selectStudentInfo.self.grade = selectStudentInfo.grade;
             isShowModel = false;
+            message.success(res.msg || "成功");
+        } else {
+            message.error(res.msg || "error");
         }
     })
 }
@@ -115,4 +118,6 @@ axiosApi.get(`/course/${route.params.cid}/grade`).then(res => {
 
 <script lang="ts">
 import { h, reactive } from 'vue';
+import { useMessage } from 'naive-ui';
+const message = useMessage();
 </script>

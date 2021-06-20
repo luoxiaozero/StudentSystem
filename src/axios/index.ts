@@ -32,6 +32,20 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response) => {
     if (response.status == 200) {
+      if (response.data.code == 401) {
+        const route = useRoute();
+        store.userToken = "";
+        router.push({
+          path: "/login",
+          query: { redirect: route.fullPath },
+        });
+      } else if (response.data.code == 500) {
+        const route = useRoute();
+        router.push({
+          path: "/500",
+          query: { redirect: route.fullPath },
+        });
+      }
       return Promise.resolve(response);
     } else {
       return Promise.reject(response);
@@ -39,13 +53,17 @@ axios.interceptors.response.use(
   },
   (error) => {
     if (error.response) {
+      const route = useRoute();
       switch (error.response.status) {
         case 401:
-          const route = useRoute();
-
           store.userToken = "";
           router.push({
             path: "/login",
+            query: { redirect: route.fullPath },
+          });
+        case 500:
+          router.push({
+            path: "/500",
             query: { redirect: route.fullPath },
           });
         default:

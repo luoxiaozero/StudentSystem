@@ -1,5 +1,5 @@
 <template>
-    <n-data-table :columns="columns" :data="data" :bordered="false" />
+    <n-data-table :columns="columns" :data="data" />
 </template>
 <script lang="ts" setup>
 import { NDataTable, } from 'naive-ui';
