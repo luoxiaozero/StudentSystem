@@ -11,6 +11,7 @@ const state: State = {
 };
 
 export const theme = ref<any>(null);
+export const spaceViewKey = ref<any>(null);
 
 const store = new Proxy(state, {
   set(target, key: keyof State, value) {

@@ -20,8 +20,10 @@ import {
     TennisballOutline as TennisballOutlineIcon,
     WalletOutline as WalletOutlineIcon
 } from '@vicons/ionicons5';
-import store from '../store';
+import store, { spaceViewKey } from '../store';
 import axiosApi from '../axios';
+
+const emit = defineEmit(["colsePopover"]);
 axiosApi.get("/sdept").then(res => {
     if (res.code == 200) {
         classification.children = [];
@@ -107,8 +109,13 @@ if (store.userType == "student") {
     });
     activeKey = "hear-grade";
 }
+watch(() => activeKey, (value) => {
+    emit("colsePopover");
+
+    spaceViewKey.value = value;
+})
 </script>
 
 <script lang="ts">
-import { h, reactive } from 'vue';
+import { h, reactive, watch , defineEmit} from 'vue';
 </script>

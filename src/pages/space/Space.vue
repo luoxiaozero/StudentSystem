@@ -45,6 +45,7 @@ import MCourse from "./MCourse.vue";
 import TCourse from "./TCourse.vue";
 import MTeam from "./MTeam.vue";
 import SGrade from "./SGrade.vue";
+import { } from "../../store";
 import {
     BookOutline as BookIcon,
     PersonOutline as PersonIcon,
@@ -108,6 +109,9 @@ ref: classification = {
     ]
 };
 ref: activeKey = "";
+watch(() => spaceViewKey.value, (value) => {
+    activeKey = value;
+})
 const menuOptions = reactive<any[]>([
 ])
 if (store.userType == "admin") {
@@ -146,13 +150,12 @@ ref: collapsed = false;
 <script lang="ts">
 // import { MenuOption } from "naive-ui";
 import axiosApi from "../../axios";
-import store from "../../store";
-import { h, reactive } from 'vue'
+import store, { spaceViewKey } from "../../store";
+import { h, reactive, watch } from 'vue'
 </script>
 
 <style scoped>
-
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
     .space-sider {
         display: none;
     }

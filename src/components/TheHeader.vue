@@ -1,19 +1,23 @@
 <template>
     <n-layout-header class="nav" bordered>
+        <div
+            style="position: fixed;top:0;bottom: 0;left: 0;right: 0;"
+            v-if="showPopover"
+            @click="showPopover = false"
+        ></div>
         <n-popover
             placement="bottom-end"
-            trigger="click"
-            style="padding: 5px 0; width: 260px;border-radius: 10px;"
-            
+            trigger="manual"
+            style="padding: 5px 0; width: 70vw;border-radius: 10px;min-width: 230px;"
+            :show="showPopover"
         >
             <template #trigger>
-                <n-button text style="height: 54px;" class="nav__menu">
+                <n-button text style="height: 54px;" class="nav__menu" @click="showPopover = true">
                     <n-icon style="width: 40px;height: 20px;">
                         <menu-icon style="width: 20px;height: 20px;" />
                     </n-icon>
                 </n-button>
             </template>
-
             <div @click="jumpSpace" class="menu-mobile-item">
                 <n-icon class="menu-mobile-item__icon">
                     <cloud-outline-icon />
@@ -35,7 +39,7 @@
                 <span title="主题" v-else>浅色</span>
             </div>
             <n-divider style="margin: 3px 0;" />
-            <the-menu />
+            <the-menu @colsePopover="() => showPopover = false" />
         </n-popover>
 
         <n-button text @click="jumpSpace" class="screen500">
@@ -83,6 +87,7 @@ import {
 import router from "../router";
 import store from "../store";
 import { theme } from '../store';
+ref: showPopover = false;
 const jumpSpace = () => {
     router.push("/space");
 }
@@ -111,7 +116,7 @@ const login = () => {
 .nav__menu {
     display: none;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
     .nav {
         padding: 0 20px;
     }
@@ -121,24 +126,24 @@ const login = () => {
     .screen500 {
         display: none;
     }
-    .menu-mobile-item {
-        transition: background-color 0.3s var(--bezier);
-        height: 42px;
-        line-height: 42px;
-        margin-top: 2px;
-        padding: 0 26px;
-        cursor: pointer;
-    }
-    .menu-mobile-item:hover {
-        color: #18a058;
-    }
-    .menu-mobile-item__icon {
-        width: 22px;
-        height: 22px;
-        font-size: 20px;
-        margin-right: 8px;
-        position: relative;
-        top: 4px;
-    }
+}
+.menu-mobile-item {
+    transition: background-color 0.3s var(--bezier);
+    height: 42px;
+    line-height: 42px;
+    margin-top: 2px;
+    padding: 0 26px;
+    cursor: pointer;
+}
+.menu-mobile-item:hover {
+    color: #18a058;
+}
+.menu-mobile-item__icon {
+    width: 22px;
+    height: 22px;
+    font-size: 20px;
+    margin-right: 8px;
+    position: relative;
+    top: 4px;
 }
 </style>
