@@ -1,50 +1,16 @@
 <template>
-    <n-layout style="height: 100vh;">
-        <the-header />
-        <n-layout position="absolute" style="top: 54px; " has-sider>
-            <n-layout-sider
-                bordered
-                collapse-mode="width"
-                :collapsed-width="64"
-                :width="260"
-                :collapsed="collapsed"
-                show-trigger
-                @collapse="() => collapsed = true"
-                @expand="() => collapsed = false"
-                class="space-sider"
-            >
-                <n-menu
-                    :root-indent="26"
-                    :indent="12"
-                    :collapsed="collapsed"
-                    :collapsed-width="64"
-                    :collapsed-icon-size="22"
-                    :options="menuOptions"
-                    v-model:value="activeKey"
-                />
-            </n-layout-sider>
-            <n-layout content-style="padding: 24px;" :native-scrollbar="false">
-                <m-new v-if="activeKey == 'hear-new'" />
-                <m-team
-                    v-else-if="/^hear-class-/.test(activeKey)"
-                    :team-id="parseInt(activeKey.slice(11))"
-                />
-                <m-course v-else-if="activeKey == 'hear-course-m'" />
-                <t-course v-else-if="activeKey == 'hear-course-t'" />
-                <s-grade v-else-if="activeKey == 'hear-grade'" />
-            </n-layout>
-        </n-layout>
-    </n-layout>
+    <n-menu
+        :root-indent="26"
+        :indent="12"
+        :collapsed="collapsed"
+        :collapsed-width="64"
+        :collapsed-icon-size="22"
+        :options="menuOptions"
+        v-model:value="activeKey"
+    />
 </template>
-
 <script lang="ts" setup>
-import { NLayout, NMenu, NLayoutSider, NIcon } from "naive-ui";
-import TheHeader from "../../components/TheHeader.vue"
-import MNew from "./MNew.vue";
-import MCourse from "./MCourse.vue";
-import TCourse from "./TCourse.vue";
-import MTeam from "./MTeam.vue";
-import SGrade from "./SGrade.vue";
+import { NMenu, NIcon } from "naive-ui";
 import {
     BookOutline as BookIcon,
     PersonOutline as PersonIcon,
@@ -54,7 +20,8 @@ import {
     TennisballOutline as TennisballOutlineIcon,
     WalletOutline as WalletOutlineIcon
 } from '@vicons/ionicons5';
-
+import store from '../store';
+import axiosApi from '../axios';
 axiosApi.get("/sdept").then(res => {
     if (res.code == 200) {
         classification.children = [];
@@ -98,7 +65,8 @@ axiosApi.get("/sdept").then(res => {
 function renderIcon(icon: any) {
     return () => h(NIcon, null, { default: () => h(icon) })
 }
-
+ref: activeKey = "";
+ref: collapsed = false;
 ref: classification = {
     label: '系部',
     key: 'hear-classification',
@@ -107,7 +75,6 @@ ref: classification = {
 
     ]
 };
-ref: activeKey = "";
 const menuOptions = reactive<any[]>([
 ])
 if (store.userType == "admin") {
@@ -140,21 +107,8 @@ if (store.userType == "student") {
     });
     activeKey = "hear-grade";
 }
-
-ref: collapsed = false;
 </script>
+
 <script lang="ts">
-// import { MenuOption } from "naive-ui";
-import axiosApi from "../../axios";
-import store from "../../store";
-import { h, reactive } from 'vue'
+import { h, reactive } from 'vue';
 </script>
-
-<style scoped>
-
-@media screen and (max-width: 600px) {
-    .space-sider {
-        display: none;
-    }
-}
-</style>
