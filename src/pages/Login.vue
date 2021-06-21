@@ -26,7 +26,7 @@
                 <n-input v-model:value="userInfo.account" placeholder="请输入教工号" clearable />
               </n-form-item-row>
               <n-form-item-row label="密码">
-                <n-input v-model:value="userInfo.password" type="password" placeholder="请输入密码" />
+                <n-input v-model:value="userInfo.password" type="password" placeholder="请输入密码" clearable/>
               </n-form-item-row>
             </n-form>
             <n-button type="primary" block @click="login">登录</n-button>
@@ -37,7 +37,7 @@
                 <n-input v-model:value="userInfo.account" placeholder="请输入账号" clearable />
               </n-form-item-row>
               <n-form-item-row label="密码">
-                <n-input v-model:value="userInfo.password" type="password" placeholder="请输入密码" />
+                <n-input v-model:value="userInfo.password" type="password" placeholder="请输入密码" clearable/>
               </n-form-item-row>
             </n-form>
             <n-button type="primary" block @click="login">登录</n-button>
@@ -81,6 +81,8 @@ const login = () => {
       store.userType = userInfo.type as any;
       store.userToken = res.data.token;
       router.push("/space");
+    } else {
+      showMessage(res.msg || "error");
     }
   })
 }

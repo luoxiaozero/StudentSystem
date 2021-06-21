@@ -42,7 +42,7 @@
     </n-card>
     <n-card title="新建组织" class="n-card-user">
         <n-grid x-gap="12" y-gap="5" cols="1 300:2 500:3 900:4 1100:5">
-            <m-new-card title="新建系部" @confirm="newSdept">
+            <m-new-card title="新建系部" @open-model="openSdept" @confirm="newSdept">
                 <template #icon>
                     <business-outline />
                 </template>
@@ -166,6 +166,9 @@ ref: selectDateRange = [Date.now(), Date.now() + 15768000] as [number, number];
 ref: selectTeacher = undefined as any;
 ref: courseName = "";
 ref: sdeptName = "";
+const openSdept = () => {
+    sdeptName = "";
+}
 const newSdept = (closeModel: Function) => {
     if (!sdeptName || sdeptName == "") {
         message.error("系部名不能为空");
@@ -175,8 +178,10 @@ const newSdept = (closeModel: Function) => {
         name: sdeptName,
     }).then(res => {
         if (res.code == 200) {
-            message.success("新建系部成功");
+            message.success(res.msg || "成功");
             closeModel();
+        } else {
+            message.error(res.msg || "error");
         }
     })
 }
@@ -200,6 +205,10 @@ const teamAllInfo = reactive<{
     children: Array<any>
 }[]>([]);
 const openCourse = () => {
+    courseName = "";
+    selectDateRange = [Date.now(), Date.now() + 15768000];
+    selectTeacher = null;
+    selectAllTeam = null;
     axiosApi.get("/sdept").then(res => {
         if (res.code == 200) {
             teamAllInfo.length = 0;
@@ -273,6 +282,10 @@ const newCourse = (closeModel: Function) => {
         message.error("课程名不能为空");
         return;
     }
+    if (!selectDateRange) {
+        message.error("日期范围不能为空");
+        return;
+    }
     if (!selectTeacher) {
         message.error("教工不能为空");
         return;
@@ -281,7 +294,7 @@ const newCourse = (closeModel: Function) => {
         message.error("班级不能为空");
         return;
     }
-    console.log(selectAllTeam, selectTeacher, courseName, selectDateRange);
+
     let classIds: number[] = [];
     (selectAllTeam as unknown as string[]).forEach(element => {
         classIds.push(parseInt(element.split("-")[2]));
@@ -301,8 +314,11 @@ const newCourse = (closeModel: Function) => {
         }
     })
 }
+
+/**新建专业初始化 */
 const openMajor = () => {
     selectSdept = undefined;
+    majorName = "";
     getSdept();
 }
 

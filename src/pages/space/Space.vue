@@ -75,7 +75,6 @@ axiosApi.get("/sdept").then(res => {
                             icon: renderIcon(TennisballOutlineIcon),
                             children: teamChildren
                         })
-                        let majorId = element.id;
                         axiosApi.get("/class", { majorId: element.id }).then(res => {
                             if (res.code == 200) {
                                 res.data.forEach((element: { id: number, name: string, graduationYear: string }) => {
@@ -138,6 +137,7 @@ if (store.userType == "student") {
         key: 'hear-grade',
         icon: renderIcon(GolfOutlineIcon),
     });
+    activeKey = "hear-grade";
 }
 
 ref: collapsed = false;

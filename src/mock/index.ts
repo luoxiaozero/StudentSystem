@@ -47,11 +47,11 @@ Mock.mock("/api/major?sdeptId=2", {
   code: 200,
   data: [
     {
-      id: 1,
+      id: 3,
       name: "英语教育",
     },
     {
-      id: 2,
+      id: 4,
       name: "文化与传播",
     },
   ],
@@ -97,6 +97,28 @@ Mock.mock("/api/class?majorId=2", {
   ],
 });
 
+Mock.mock("/api/class?majorId=3", {
+  code: 200,
+  data: [
+    {
+      id: 5,
+      name: "一班",
+      graduationYear: "2020",
+    },
+  ],
+});
+
+Mock.mock("/api/class?majorId=4", {
+  code: 200,
+  data: [
+    {
+      id: 6,
+      name: "一班",
+      graduationYear: "2019",
+    },
+  ],
+});
+
 Mock.mock("/api/student/create", {
   code: 200,
 });
@@ -124,11 +146,11 @@ Mock.mock("/api/student?classId=1", {
   data: [
     {
       id: 2020020000,
-      name: "张三s",
+      name: "图灵",
     },
     {
       id: 2020020000,
-      name: "李四",
+      name: "冯诺依曼",
     },
   ],
 });
