@@ -27,7 +27,7 @@
             <n-breadcrumb-item v-show="selectTeamName">{{ selectTeamName }}</n-breadcrumb-item>
         </n-breadcrumb>
         <div v-if="showInfo">
-            <n-grid x-gap="12" y-gap="5" cols="1 300:2 500:3 900:4 1100:5">
+            <n-grid x-gap="12" y-gap="16" cols="1 600:3 900:4 1100:5">
                 <n-gi class="card" v-for="info in showInfo" @click="openSelect(info.key)">
                     <div class="card__title">{{ info.label }}</div>
                 </n-gi>
@@ -170,6 +170,12 @@ axiosApi.get("/sdept").then(res => {
 }
 .card:hover {
     background-color: #55c68a;
+}
+@media screen and (max-width: 700px) {
+    .card {
+        width: 100%;
+        height: 120px;
+    }
 }
 .card__title {
     font-size: 0.9em;
