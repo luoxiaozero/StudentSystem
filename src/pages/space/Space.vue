@@ -30,6 +30,7 @@
                     :team-id="parseInt(activeKey.slice(11))"
                 />
                 <m-course v-else-if="activeKey == 'hear-course-m'" />
+                <m-group v-else-if="activeKey == 'hear-department'" />
                 <t-course v-else-if="activeKey == 'hear-course-t'" />
                 <s-grade v-else-if="activeKey == 'hear-grade'" />
             </n-layout>
@@ -42,72 +43,22 @@ import { NLayout, NMenu, NLayoutSider, NIcon } from "naive-ui";
 import TheHeader from "../../components/TheHeader.vue"
 import MNew from "./MNew.vue";
 import MCourse from "./MCourse.vue";
+import MGroup from "./MGroup.vue";
 import TCourse from "./TCourse.vue";
 import MTeam from "./MTeam.vue";
 import SGrade from "./SGrade.vue";
 import { } from "../../store";
 import {
     BookOutline as BookIcon,
-    PersonOutline as PersonIcon,
     GolfOutline as GolfOutlineIcon,
     Add as AddIcon,
     BusinessOutline as BusinessOutlineIcon,
-    TennisballOutline as TennisballOutlineIcon,
-    WalletOutline as WalletOutlineIcon
 } from '@vicons/ionicons5';
 
-axiosApi.get("/sdept").then(res => {
-    if (res.code == 200) {
-        classification.children = [];
-        res.data.forEach((element: { id: number, name: string }) => {
-            let majorChildren: any[] = reactive([]);
-            (classification.children as any[]).push({
-                key: "hear-sdept-" + element.id.toString(),
-                label: element.name,
-                icon: renderIcon(PersonIcon),
-                children: majorChildren
-            });
-            axiosApi.get("/major", { sdeptId: element.id }).then(res => {
-                if (res.code == 200) {
-                    res.data.forEach((element: { id: number, name: string }) => {
-                        let teamChildren: any[] = reactive([]);
-                        majorChildren.push({
-                            key: "hear-major-" + element.id.toString(),
-                            label: element.name,
-                            icon: renderIcon(TennisballOutlineIcon),
-                            children: teamChildren
-                        })
-                        axiosApi.get("/class", { majorId: element.id }).then(res => {
-                            if (res.code == 200) {
-                                res.data.forEach((element: { id: number, name: string, graduationYear: string }) => {
-                                    teamChildren.push({
-                                        key: "hear-class-" + element.id.toString(),
-                                        label: element.name,
-                                        icon: renderIcon(WalletOutlineIcon),
-                                    })
-                                });
-                            }
-                        });
-
-                    });
-                }
-            });
-
-        });
-    }
-});
 function renderIcon(icon: any) {
     return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-ref: classification = {
-    label: '系部',
-    key: 'hear-classification',
-    icon: renderIcon(BusinessOutlineIcon),
-    children: [
-
-    ]
-};
 ref: activeKey = "";
 watch(() => spaceViewKey.value, (value) => {
     activeKey = value;
@@ -115,12 +66,17 @@ watch(() => spaceViewKey.value, (value) => {
 const menuOptions = reactive<any[]>([
 ])
 if (store.userType == "admin") {
-    menuOptions.push({
-        label: '新建',
-        key: 'hear-new',
-        icon: renderIcon(AddIcon),
-    },
-        classification,
+    menuOptions.push(
+        {
+            label: '新建',
+            key: 'hear-new',
+            icon: renderIcon(AddIcon),
+        },
+        {
+            label: "系部",
+            key: "hear-department",
+            icon: renderIcon(BusinessOutlineIcon),
+        },
         {
             label: '课堂',
             key: 'hear-course-m',
