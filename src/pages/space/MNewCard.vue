@@ -41,7 +41,7 @@ const openModel = () => {
     emits("openModel");
 }
 const confirm = () => {
-    emits("confirm",  () => isShowModel = false);
+    emits("confirm", () => isShowModel = false);
 }
 </script>
 
@@ -60,6 +60,7 @@ import { defineProps, defineEmit } from 'vue';
     color: white;
     border-radius: 8px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 .card:hover {
     background-color: #55c68a;
@@ -67,5 +68,21 @@ import { defineProps, defineEmit } from 'vue';
 .card__icon {
     width: 60px;
     height: 60px;
+}
+@media screen and (max-width: 800px) {
+    .card {
+        width: 200px;
+        height: 100px;
+    }
+    .card__icon {
+        width: 40px;
+        height: 40px;
+    }
+}
+@media screen and (max-width: 700px) {
+    .card {
+        width: 100%;
+        height: 120px;
+    }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <n-card title="新建课堂" class="n-card-user">
-        <n-grid x-gap="12" y-gap="5" cols="1 300:2 500:3 900:4 1100:5">
+        <n-grid x-gap="12" y-gap="16" cols="1 600:3 900:4 1100:5">
             <m-new-card
                 title="新建必修"
                 model-width="460px"
@@ -41,7 +41,7 @@
         </n-grid>
     </n-card>
     <n-card title="新建组织" class="n-card-user">
-        <n-grid x-gap="12" y-gap="5" cols="1 300:2 500:3 900:4 1100:5">
+        <n-grid x-gap="12" y-gap="16" cols="1 600:3 900:4 1100:5">
             <m-new-card title="新建系部" @open-model="openSdept" @confirm="newSdept">
                 <template #icon>
                     <business-outline />
@@ -96,7 +96,7 @@
     </n-card>
 
     <n-card title="新建人员" class="n-card-user">
-        <n-grid x-gap="12" y-gap="5" cols="1 300:2 500:3 900:4 1100:5">
+        <n-grid x-gap="12" y-gap="16" cols="1 600:3 900:4 1100:5">
             <m-new-card title="新建教工" @open-model="openTeacher" @confirm="newTeacher">
                 <template #icon>
                     <person-outline />
