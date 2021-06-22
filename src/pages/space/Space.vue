@@ -83,6 +83,7 @@ if (store.userType == "admin") {
             icon: renderIcon(BookIcon),
         });
     activeKey = "hear-new";
+    document.title = document.title + " | 管理员";
 }
 if (store.userType == "teacher") {
     menuOptions.push({
@@ -91,6 +92,7 @@ if (store.userType == "teacher") {
         icon: renderIcon(BookIcon),
     })
     activeKey = "hear-course-t";
+    document.title = document.title + " | 教工";
 }
 if (store.userType == "student") {
     menuOptions.push({
@@ -99,6 +101,7 @@ if (store.userType == "student") {
         icon: renderIcon(GolfOutlineIcon),
     });
     activeKey = "hear-grade";
+    document.title = document.title + " | 学生";
 }
 
 ref: collapsed = false;

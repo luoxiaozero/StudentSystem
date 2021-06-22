@@ -88,8 +88,9 @@
                         placeholder="请输入年级（例: 2021）"
                         clearable
                         style="margin-bottom: 16px;"
+                        maxlength="4"
                     />
-                    <n-input v-model:value="teamName" placeholder="请输入班级名" clearable />
+                    <n-input v-model:value="teamName" placeholder="请输入班级名" clearable maxlength="40"/>
                 </template>
             </m-new-card>
         </n-grid>
@@ -113,8 +114,14 @@
                         placeholder="请输入工号"
                         clearable
                         style="margin-bottom: 16px;"
+                        maxlength="11"
                     />
-                    <n-input v-model:value="teacherName" placeholder="请输入教工名" clearable />
+                    <n-input 
+                        v-model:value="teacherName" 
+                        placeholder="请输入教工名" 
+                        clearable 
+                        maxlength="40"
+                        />
                 </template>
             </m-new-card>
             <m-new-card title="新建学生" @open-model="openStudent" @confirm="newStudent">
@@ -149,8 +156,9 @@
                         placeholder="请输入学号"
                         clearable
                         style="margin-bottom: 16px;"
+                        maxlength="11"
                     />
-                    <n-input v-model:value="studentName" placeholder="请输入学生名" clearable />
+                    <n-input v-model:value="studentName" placeholder="请输入学生名" clearable maxlength="40"/>
                 </template>
             </m-new-card>
         </n-grid>

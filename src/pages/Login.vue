@@ -56,7 +56,7 @@ import { NCard, NTabs, NTabPane, NButton, NFormItemRow, NInput, NForm } from "na
 import router from "../router";
 import axiosApi from "../axios";
 import store from "../store";
-
+store.userToken && router.push("/space");
 const userInfo = reactive({
   type: "student",
   account: "",
