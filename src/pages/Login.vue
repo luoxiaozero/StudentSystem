@@ -76,7 +76,7 @@ const login = () => {
     showMessage("账号密码不能为空");
     return;
   }
-  axiosApi.post("/login", userInfo).then(res => {
+  axiosApi.post("/" + userInfo.type + "/login", userInfo).then(res => {
     if (res.code == 200) {
       store.userType = userInfo.type as any;
       store.userToken = res.data.token;
