@@ -24,7 +24,7 @@
                 </n-icon>
                 <span>空间</span>
             </div>
-            <div @click="login" class="menu-mobile-item">
+            <div @click="logout" class="menu-mobile-item">
                 <n-icon class="menu-mobile-item__icon">
                     <log-in-outline-icon />
                 </n-icon>
@@ -52,7 +52,7 @@
         </n-button>
 
         <div style="float: right;" class="screen500">
-            <n-button text @click="login">
+            <n-button text @click="logout">
                 <template #icon>
                     <n-icon>
                         <log-in-outline-icon />
@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts" setup>
-import { NLayoutHeader, NButton, NIcon, darkTheme, NPopover, NDivider } from "naive-ui";
+import { NLayoutHeader, NButton, NIcon, darkTheme, NPopover, NDivider, useMessage } from "naive-ui";
 import TheMenu from "./TheMenu.vue";
 import {
     LogInOutline as LogInOutlineIcon,
@@ -87,6 +87,7 @@ import {
 import router from "../router";
 import store from "../store";
 import { theme } from '../store';
+import axiosApi from "../axios";
 ref: showPopover = false;
 const jumpSpace = () => {
     router.push("/space");
@@ -98,9 +99,17 @@ const changeTheme = () => {
         theme.value = darkTheme;
     }
 }
-const login = () => {
+const message = useMessage();
+const logout = () => {
     store.userToken = "";
     store.userType = "";
+    axiosApi.post("/logout").then(res => {
+        if (res.code == 200) {
+            message.success(res.msg || "成功");
+        } else {
+            console.log(res.msg || "登出失败");
+        }
+    })
     router.push("/");
 }
 </script>
