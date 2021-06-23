@@ -89,6 +89,19 @@ import store from "../store";
 import { theme } from '../store';
 import axiosApi from "../axios";
 ref: showPopover = false;
+let timer = false;
+window.onresize = () => {
+    if (!timer) {
+        if (document.body.clientWidth > 1000 && showPopover) {
+            showPopover = false;
+        }
+        timer = true;
+        setTimeout(() => {
+            timer = false;
+        }, 400)
+    }
+}
+
 const jumpSpace = () => {
     router.push("/space");
 }

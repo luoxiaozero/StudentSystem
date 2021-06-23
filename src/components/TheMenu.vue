@@ -109,9 +109,11 @@ if (store.userType == "student") {
     });
     activeKey = "hear-grade";
 }
+if (spaceViewKey.value) {
+    activeKey = spaceViewKey.value;
+}
 watch(() => activeKey, (value) => {
     emit("colsePopover");
-
     spaceViewKey.value = value;
 })
 </script>
