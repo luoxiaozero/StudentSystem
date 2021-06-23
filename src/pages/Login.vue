@@ -1,6 +1,6 @@
 <template>
   <div class="bg-img">
-    <video style="width: 100vw;" autoplay muted loop>
+    <video style="width: 100vw;" autoplay muted="true" loop v-if="!isMobile">
       <source src="/src/assets/login-bg.mp4" type="video/mp4" />
     </video>
   </div>
@@ -71,6 +71,14 @@ import router from "../router";
 import axiosApi from "../axios";
 import store from "../store";
 store.userToken && router.push("/space");
+ref: isMobile = false;
+
+const ua = navigator.userAgent;
+const ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
+const isIphone =!ipad && !!ua.match(/(iPhone\sOS)\s([\d_]+)/);
+const isAndroid = !!ua.match(/(Android)\s+([\d.]+)/);
+isMobile = (isIphone || isAndroid) as boolean;
+
 const userInfo = reactive({
   type: "student",
   account: "",
@@ -136,9 +144,9 @@ import { reactive } from "vue";
     filter: blur(8px);
   }
   40% {
-    filter: blur(1px);
+    filter: blur(2px);
   }
-  50% {
+  46% {
     filter: blur(0);
   }
   70% {
