@@ -1,5 +1,9 @@
 <template>
-  <div class="bg-img"></div>
+  <div class="bg-img">
+    <video style="width: 100vw;" autoplay muted loop>
+      <source src="/src/assets/login-bg.mp4" type="video/mp4" />
+    </video>
+  </div>
   <div class="box">
     <n-card style="width: 440px;border-radius: 10px;" content-style="padding:22px 28px 11px;">
       <template #default>
@@ -26,7 +30,12 @@
                 <n-input v-model:value="userInfo.account" placeholder="请输入教工号" clearable />
               </n-form-item-row>
               <n-form-item-row label="密码">
-                <n-input v-model:value="userInfo.password" type="password" placeholder="请输入密码" clearable/>
+                <n-input
+                  v-model:value="userInfo.password"
+                  type="password"
+                  placeholder="请输入密码"
+                  clearable
+                />
               </n-form-item-row>
             </n-form>
             <n-button type="primary" block @click="login">登录</n-button>
@@ -37,7 +46,12 @@
                 <n-input v-model:value="userInfo.account" placeholder="请输入账号" clearable />
               </n-form-item-row>
               <n-form-item-row label="密码">
-                <n-input v-model:value="userInfo.password" type="password" placeholder="请输入密码" clearable/>
+                <n-input
+                  v-model:value="userInfo.password"
+                  type="password"
+                  placeholder="请输入密码"
+                  clearable
+                />
               </n-form-item-row>
             </n-form>
             <n-button type="primary" block @click="login">登录</n-button>
@@ -100,7 +114,7 @@ import { reactive } from "vue";
   bottom: 0;
   filter: blur(8px);
   background: #fff0;
-  background-image: url("/src/assets/20200610113912817.jpg");
+  background-image: url("/src/assets/login-bg.jpg");
   background-repeat: round;
 }
 .title {
@@ -112,6 +126,28 @@ import { reactive } from "vue";
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.box > .n-card {
+  animation: box-a 2s;
+}
+@keyframes box-a {
+  0% {
+    transform: scale(0);
+    filter: blur(8px);
+  }
+  40% {
+    filter: blur(1px);
+  }
+  50% {
+    filter: blur(0);
+  }
+  70% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    
+  }
 }
 .box__message {
   height: 26px;
