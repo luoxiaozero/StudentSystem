@@ -70,7 +70,7 @@ function renderIcon(icon: any) {
 ref: activeKey = "";
 ref: collapsed = false;
 ref: classification = {
-    label: '系部',
+    label: '部门',
     key: 'hear-classification',
     icon: renderIcon(BusinessOutlineIcon),
     children: [
@@ -87,7 +87,7 @@ if (store.userType == "admin") {
     },
         classification,
         {
-            label: '课堂',
+            label: '财务分工',
             key: 'hear-course-m',
             icon: renderIcon(BookIcon),
         });
@@ -95,7 +95,7 @@ if (store.userType == "admin") {
 }
 if (store.userType == "teacher") {
     menuOptions.push({
-        label: '课堂',
+        label: '部门',
         key: 'hear-course-t',
         icon: renderIcon(BookIcon),
     })
@@ -103,7 +103,7 @@ if (store.userType == "teacher") {
 }
 if (store.userType == "student") {
     menuOptions.push({
-        label: '查成绩',
+        label: '查工资',
         key: 'hear-grade',
         icon: renderIcon(GolfOutlineIcon),
     });

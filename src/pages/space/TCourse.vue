@@ -1,3 +1,4 @@
+
 <template>
     <n-data-table :columns="columns" :data="data" :bordered="false" />
 </template>
@@ -10,12 +11,12 @@ import axiosApi from '../../axios';
 const columns
     = [
         {
-            title: '学期',
+            title: '月份',
             key: 'semester',
 
         },
         {
-            title: '课程名',
+            title: '岗位',
             key: 'courseName',
 
         },
@@ -29,7 +30,7 @@ const columns
                         size: 'small',
                         onClick: () => router.push("/course/" + row.courseId + "/grade/entry"),
                     },
-                    { default: () => '录入成绩' }
+                    { default: () => '录入工资' }
                 )
             }
         }

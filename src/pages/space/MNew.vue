@@ -1,171 +1,193 @@
 <template>
-    <n-card title="新建课堂" class="n-card-user">
+    <n-card title="新建职位" class="n-card-user">
         <n-grid x-gap="12" y-gap="16" cols="1 600:3 900:4 1100:5">
-            <m-new-card
-                title="新建必修"
-                model-width="460px"
-                @open-model="openCourse"
-                @confirm="newCourse"
-            >
-                <template #icon>
-                    <book-icon />
-                </template>
-                <template #model>
-                    <n-input
-                        placeholder="请输入课程名"
-                        v-model:value="courseName"
-                        clearable
-                        style="margin-bottom: 16px;"
-                    />
-                    <n-date-picker
-                        v-model:value="selectDateRange"
-                        type="daterange"
-                        clearable
-                        style="margin-bottom: 16px;"
-                    />
-                    <n-select
-                        filterable
-                        v-model:value="selectTeacher"
-                        :options="teacherInfo"
-                        placeholder="请选择教工"
-                        style="margin-bottom: 16px;"
-                    />
-                    <n-select
-                        multiple
-                        v-model:value="selectAllTeam"
-                        :options="teamAllInfo"
-                        placeholder="请选择班级"
-                    />
-                </template>
-            </m-new-card>
+            <n-gi>
+                <m-new-card
+                    title="新建职位"
+                    model-width="460px"
+                    @open-model="openCourse"
+                    @confirm="newCourse"
+                >
+                    <template #icon>
+                        <book-icon />
+                    </template>
+                    <template #model>
+                        <n-input
+                            placeholder="请输入岗位名"
+                            v-model:value="courseName"
+                            clearable
+                            style="margin-bottom: 16px;"
+                        />
+                        <n-date-picker
+                            v-model:value="selectDateRange"
+                            type="daterange"
+                            clearable
+                            style="margin-bottom: 16px;"
+                        />
+                        <n-select
+                            filterable
+                            v-model:value="selectTeacher"
+                            :options="teacherInfo"
+                            placeholder="请选择部位"
+                            style="margin-bottom: 16px;"
+                        />
+                        <n-select
+                            multiple
+                            v-model:value="selectAllTeam"
+                            :options="teamAllInfo"
+                            placeholder="请选择小组"
+                        />
+                    </template>
+                </m-new-card>
+            </n-gi>
         </n-grid>
     </n-card>
     <n-card title="新建组织" class="n-card-user">
         <n-grid x-gap="12" y-gap="16" cols="1 600:3 900:4 1100:5">
-            <m-new-card title="新建系部" @open-model="openSdept" @confirm="newSdept">
-                <template #icon>
-                    <business-outline />
-                </template>
-                <template #model>
-                    <n-input v-model:value="sdeptName" placeholder="请输入系部名" clearable />
-                </template>
-            </m-new-card>
-            <m-new-card title="新建专业" @open-model="openMajor" @confirm="newMajor">
-                <template #icon>
-                    <tennisball-outline />
-                </template>
-                <template #model>
-                    <n-select
-                        v-model:value="selectSdept"
-                        :options="sdeptInfo"
-                        style="margin-bottom: 16px;"
-                        placeholder="请选择系部"
-                    />
-                    <n-input v-model:value="majorName" placeholder="请输入专业名" clearable />
-                </template>
-            </m-new-card>
-            <m-new-card title="新建班级" @open-model="openTeam" @confirm="newTeam">
-                <template #icon>
-                    <wallet-outline />
-                </template>
-                <template #model>
-                    <n-select
-                        v-model:value="selectSdept"
-                        :options="sdeptInfo"
-                        style="margin-bottom: 16px;"
-                        @update:value="updateSdept"
-                        placeholder="请选择系部"
-                    />
-                    <n-select
-                        v-model:value="selectMajor"
-                        :options="majorInfo"
-                        style="margin-bottom: 16px;"
-                        @focus="getMajor"
-                        placeholder="请选择专业"
-                    />
-                    <n-input
-                        v-model:value="graduationYear"
-                        placeholder="请输入年级（例: 2021）"
-                        clearable
-                        style="margin-bottom: 16px;"
-                        maxlength="4"
-                    />
-                    <n-input v-model:value="teamName" placeholder="请输入班级名" clearable maxlength="40"/>
-                </template>
-            </m-new-card>
+            <n-gi>
+                <m-new-card title="新建部门" @open-model="openSdept" @confirm="newSdept">
+                    <template #icon>
+                        <business-outline />
+                    </template>
+                    <template #model>
+                        <n-input v-model:value="sdeptName" placeholder="请输入部门名" clearable />
+                    </template>
+                </m-new-card>
+            </n-gi>
+            <n-gi>
+                <m-new-card title="新建专业" @open-model="openMajor" @confirm="newMajor">
+                    <template #icon>
+                        <tennisball-outline />
+                    </template>
+                    <template #model>
+                        <n-select
+                            v-model:value="selectSdept"
+                            :options="sdeptInfo"
+                            style="margin-bottom: 16px;"
+                            placeholder="请选择部门"
+                        />
+                        <n-input v-model:value="majorName" placeholder="请输入专业名" clearable />
+                    </template>
+                </m-new-card>
+            </n-gi>
+            <n-gi>
+                <m-new-card title="新建小组" @open-model="openTeam" @confirm="newTeam">
+                    <template #icon>
+                        <wallet-outline />
+                    </template>
+                    <template #model>
+                        <n-select
+                            v-model:value="selectSdept"
+                            :options="sdeptInfo"
+                            style="margin-bottom: 16px;"
+                            @update:value="updateSdept"
+                            placeholder="请选择部门"
+                        />
+                        <n-select
+                            v-model:value="selectMajor"
+                            :options="majorInfo"
+                            style="margin-bottom: 16px;"
+                            @focus="getMajor"
+                            placeholder="请选择专业"
+                        />
+                        <n-input
+                            v-model:value="graduationYear"
+                            placeholder="请输入入职时间（例: 2021）"
+                            clearable
+                            style="margin-bottom: 16px;"
+                            maxlength="4"
+                        />
+                        <n-input
+                            v-model:value="teamName"
+                            placeholder="请输入小组名"
+                            clearable
+                            maxlength="40"
+                        />
+                    </template>
+                </m-new-card>
+            </n-gi>
         </n-grid>
     </n-card>
 
     <n-card title="新建人员" class="n-card-user">
         <n-grid x-gap="12" y-gap="16" cols="1 600:3 900:4 1100:5">
-            <m-new-card title="新建教工" @open-model="openTeacher" @confirm="newTeacher">
-                <template #icon>
-                    <person-outline />
-                </template>
-                <template #model>
-                    <n-select
-                        v-model:value="selectSdept"
-                        :options="sdeptInfo"
-                        style="margin-bottom: 16px;"
-                        placeholder="请选择系部"
-                    />
-                    <n-input
-                        v-model:value="teacherId"
-                        placeholder="请输入工号"
-                        clearable
-                        style="margin-bottom: 16px;"
-                        maxlength="11"
-                    />
-                    <n-input 
-                        v-model:value="teacherName" 
-                        placeholder="请输入教工名" 
-                        clearable 
-                        maxlength="40"
+            <n-gi>
+                <m-new-card title="新建部门财务" @open-model="openTeacher" @confirm="newTeacher">
+                    <template #icon>
+                        <person-outline />
+                    </template>
+                    <template #model>
+                        <n-select
+                            v-model:value="selectSdept"
+                            :options="sdeptInfo"
+                            style="margin-bottom: 16px;"
+                            placeholder="请选择部门"
                         />
-                </template>
-            </m-new-card>
-            <m-new-card title="新建学生" @open-model="openStudent" @confirm="newStudent">
-                <template #icon>
-                    <person-outline />
-                </template>
-                <template #model>
-                    <n-select
-                        v-model:value="selectSdept"
-                        :options="sdeptInfo"
-                        style="margin-bottom: 16px;"
-                        placeholder="请选择系部"
-                        @update:value="updateSdept"
-                    />
-                    <n-select
-                        v-model:value="selectMajor"
-                        :options="majorInfo"
-                        style="margin-bottom: 16px;"
-                        @focus="getMajor"
-                        @update:value="updateMajor"
-                        placeholder="请选择专业"
-                    />
-                    <n-select
-                        v-model:value="selectTeam"
-                        :options="teamInfo"
-                        style="margin-bottom: 16px;"
-                        @focus="getTeam"
-                        placeholder="请选择班级"
-                    />
-                    <n-input
-                        v-model:value="studentId"
-                        placeholder="请输入学号"
-                        clearable
-                        style="margin-bottom: 16px;"
-                        maxlength="11"
-                    />
-                    <n-input v-model:value="studentName" placeholder="请输入学生名" clearable maxlength="40"/>
-                </template>
-            </m-new-card>
+                        <n-input
+                            v-model:value="teacherId"
+                            placeholder="请输入工号"
+                            clearable
+                            style="margin-bottom: 16px;"
+                            maxlength="11"
+                        />
+                        <n-input
+                            v-model:value="teacherName"
+                            placeholder="请输入姓名"
+                            clearable
+                            maxlength="40"
+                        />
+                    </template>
+                </m-new-card>
+            </n-gi>
+            <n-gi>
+                <m-new-card title="新建员工" @open-model="openStudent" @confirm="newStudent">
+                    <template #icon>
+                        <person-outline />
+                    </template>
+                    <template #model>
+                        <n-select
+                            v-model:value="selectSdept"
+                            :options="sdeptInfo"
+                            style="margin-bottom: 16px;"
+                            placeholder="请选择部门"
+                            @update:value="updateSdept"
+                        />
+                        <n-select
+                            v-model:value="selectMajor"
+                            :options="majorInfo"
+                            style="margin-bottom: 16px;"
+                            @focus="getMajor"
+                            @update:value="updateMajor"
+                            placeholder="请选择专业"
+                        />
+                        <n-select
+                            v-model:value="selectTeam"
+                            :options="teamInfo"
+                            style="margin-bottom: 16px;"
+                            @focus="getTeam"
+                            placeholder="请选择小组"
+                        />
+                        <n-input
+                            v-model:value="studentId"
+                            placeholder="请输入编号"
+                            clearable
+                            style="margin-bottom: 16px;"
+                            maxlength="11"
+                        />
+                        <n-input
+                            v-model:value="studentName"
+                            placeholder="请输入员工名"
+                            clearable
+                            maxlength="40"
+                        />
+                    </template>
+                </m-new-card>
+            </n-gi>
         </n-grid>
     </n-card>
 </template>
 <script lang="ts" setup>
-import { NGrid, NCard, NInput, NSelect, NDatePicker } from "naive-ui";
+import { NGrid, NCard, NInput, NSelect, NDatePicker, NGi } from "naive-ui";
 import { BusinessOutline, BookOutline as BookIcon, PersonOutline, TennisballOutline, WalletOutline } from "@vicons/ionicons5";
 import MNewCard from "./MNewCard.vue";
 import axiosApi from "../../axios";
@@ -179,7 +201,7 @@ const openSdept = () => {
 }
 const newSdept = (closeModel: Function) => {
     if (!sdeptName || sdeptName == "") {
-        message.error("系部名不能为空");
+        message.error("部门名不能为空");
         return;
     }
     axiosApi.post("/sdept/create", {
@@ -287,7 +309,7 @@ const openCourse = () => {
 
 const newCourse = (closeModel: Function) => {
     if (!courseName) {
-        message.error("课程名不能为空");
+        message.error("岗位名不能为空");
         return;
     }
     if (!selectDateRange) {
@@ -295,11 +317,11 @@ const newCourse = (closeModel: Function) => {
         return;
     }
     if (!selectTeacher) {
-        message.error("教工不能为空");
+        message.error("部门不能为空");
         return;
     }
     if (!selectAllTeam) {
-        message.error("班级不能为空");
+        message.error("小组名不能为空");
         return;
     }
 
@@ -343,7 +365,7 @@ const getSdept = () => {
         }
     });
 }
-/**获取班级信息 */
+/**获取小组信息 */
 const getTeam = () => {
     if (!selectMajor) {
         message.error("专业不能为空");
@@ -367,7 +389,7 @@ ref: selectMajor = undefined as any;
 ref: selectTeam = undefined as any;
 const newMajor = (closeModel: Function) => {
     if (!selectSdept) {
-        message.error("系部不能为空");
+        message.error("部门不能为空");
         return;
     }
     if (!majorName) {
@@ -401,7 +423,7 @@ const updateMajor = () => {
 
 const getMajor = () => {
     if (!selectSdept) {
-        message.error("系部不能为空");
+        message.error("部门不能为空");
         return;
     }
     selectMajor = undefined;
@@ -425,11 +447,11 @@ const newTeam = (closeModel: Function) => {
         return;
     }
     if (!graduationYear) {
-        message.error("年级不能为空");
+        message.error("入职时间不能为空");
         return;
     }
     if (!teamName) {
-        message.error("班级不能为空");
+        message.error("小组名不能为空");
         return;
     }
     axiosApi.post("/class/create", { name: teamName, graduationYear, majorId: selectMajor }).then(res => {
@@ -453,7 +475,7 @@ ref: teacherId = "";
 ref: teacherName = "";
 const newTeacher = (closeModel: Function) => {
     if (!selectSdept) {
-        message.error("系部不能为空");
+        message.error("部门不能为空");
         return;
     }
     if (!teacherId) {
@@ -461,7 +483,7 @@ const newTeacher = (closeModel: Function) => {
         return;
     }
     if (!teacherName) {
-        message.error("教工名不能为空");
+        message.error("姓名不能为空");
         return;
     }
     axiosApi.post("/teacher/create", { name: teacherName, id: parseInt(teacherId), sdeptId: selectSdept }).then(res => {
@@ -487,11 +509,11 @@ ref: studentId = "";
 ref: studentName = "";
 const newStudent = (closeModel: Function) => {
     if (!selectTeam) {
-        message.error("班级不能为空");
+        message.error("小组不能为空");
         return;
     }
     if (!studentId) {
-        message.error("学号不能为空");
+        message.error("编号不能为空");
         return;
     }
     if (!studentName) {

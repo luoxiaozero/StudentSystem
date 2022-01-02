@@ -1,27 +1,30 @@
 <template>
+    <n-space style="margin-bottom: 8px;" justify="end">
+        <n-button type="info" strong secondary>工资详情下载</n-button>
+    </n-space>
     <n-data-table :columns="columns" :data="data" />
 </template>
 <script lang="ts" setup>
-import { NDataTable, } from 'naive-ui';
+import { NDataTable, NSpace, NButton } from 'naive-ui';
 
 const columns = [
     {
-        title: '学期',
+        title: '月份',
         key: 'semester',
 
     },
     {
-        title: '课程名',
+        title: '岗位',
         key: 'courseName',
 
     },
     {
-        title: '教工',
+        title: '姓名',
         key: 'teacherName'
     },
 ];
 
-const data = reactive<{teacherName: string, courseName: string, semester: string }[]>([]);
+const data = reactive<{ teacherName: string, courseName: string, semester: string }[]>([]);
 
 axiosApi.get("/admin/course").then(res => {
     if (res.code == 200) {

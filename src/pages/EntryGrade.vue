@@ -54,7 +54,7 @@ const confirm = () => {
 }
 const columns = [
     {
-        title: '学号',
+        title: '编号',
         key: 'id',
 
     },
@@ -64,7 +64,7 @@ const columns = [
 
     },
     {
-        title: '成绩',
+        title: '工资',
         key: 'grade',
     },
     {
@@ -83,7 +83,7 @@ const columns = [
                         isShowModel = true;
                     },
                 },
-                { default: () => '录入成绩' }
+                { default: () => '录入工资' }
             )
         }
     },

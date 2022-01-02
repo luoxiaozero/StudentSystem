@@ -99,7 +99,7 @@ const selectMajor = (key: any) => {
             });
             showInfo = teamInfo;
             showInfoKey = "team";
-            tipInfo = "选择班级";
+            tipInfo = "选择小组";
         } else {
             message.error(res.msg || "error");
         }
@@ -116,7 +116,7 @@ const selectMajor = (key: any) => {
 const selectTeam = (key: any) => {
     showInfo = [];
     teamId = key;
-    tipInfo = "班级信息";
+    tipInfo = "小组信息";
     for (let i = 0; i < teamInfo.length; i++) {
         if (teamInfo[i].key == key) {
             selectTeamName = teamInfo[i].label;
@@ -148,7 +148,7 @@ axiosApi.get("/sdept").then(res => {
         });
         showInfo = sdeptInfo;
         showInfoKey = "sdept";
-        tipInfo = "选择系部";
+        tipInfo = "选择部门";
     } else {
         message.error(res.msg || "error");
     }

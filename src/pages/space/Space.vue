@@ -73,12 +73,12 @@ if (store.userType == "admin") {
             icon: renderIcon(AddIcon),
         },
         {
-            label: "系部",
+            label: "部门",
             key: "hear-department",
             icon: renderIcon(BusinessOutlineIcon),
         },
         {
-            label: '课堂',
+            label: '财务分工',
             key: 'hear-course-m',
             icon: renderIcon(BookIcon),
         });
@@ -87,21 +87,21 @@ if (store.userType == "admin") {
 }
 if (store.userType == "teacher") {
     menuOptions.push({
-        label: '课堂',
+        label: '部门',
         key: 'hear-course-t',
         icon: renderIcon(BookIcon),
     })
     activeKey = "hear-course-t";
-    document.title = document.title + " | 教工";
+    document.title = document.title + " | 财务";
 }
 if (store.userType == "student") {
     menuOptions.push({
-        label: '查成绩',
+        label: '查工资',
         key: 'hear-grade',
         icon: renderIcon(GolfOutlineIcon),
     });
     activeKey = "hear-grade";
-    document.title = document.title + " | 学生";
+    document.title = document.title + " | 员工";
 }
 
 ref: collapsed = false;

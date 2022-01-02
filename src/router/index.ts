@@ -10,7 +10,7 @@ const routes = [
     path: "/",
     component: LoginVue,
     meta: {
-      title: "学生系统",
+      title: "登录",
     },
   },
   {

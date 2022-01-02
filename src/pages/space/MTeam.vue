@@ -32,7 +32,7 @@ watch(() => props.teamId, getDate);
 getDate();
 const columns = [
     {
-        title: '学号',
+        title: '编号',
         key: 'studentId'
     },
     {

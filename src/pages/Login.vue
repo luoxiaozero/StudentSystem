@@ -1,13 +1,15 @@
 <template>
-  <div class="bg-img"></div>
+  <div class="bg-img">
+    <img src="../assets/login-bg.png" />
+  </div>
   <div class="box">
     <n-card style="width: 440px;border-radius: 10px;" content-style="padding:22px 28px 11px;">
       <template #default>
         <n-tabs size="large" v-model:value="userInfo.type">
-          <n-tab-pane name="student" tab="学生登录">
+          <n-tab-pane name="student" tab="员工登录">
             <n-form>
               <n-form-item-row label="用户名">
-                <n-input v-model:value="userInfo.account" placeholder="请输入学号" clearable />
+                <n-input v-model:value="userInfo.account" placeholder="请输入用户名" clearable />
               </n-form-item-row>
               <n-form-item-row label="密码">
                 <n-input
@@ -20,10 +22,10 @@
             </n-form>
             <n-button type="primary" block @click="login">登录</n-button>
           </n-tab-pane>
-          <n-tab-pane name="teacher" tab="教工登录">
+          <n-tab-pane name="teacher" tab="部门财务登录">
             <n-form>
               <n-form-item-row label="用户名">
-                <n-input v-model:value="userInfo.account" placeholder="请输入教工号" clearable />
+                <n-input v-model:value="userInfo.account" placeholder="请输入用户名" clearable />
               </n-form-item-row>
               <n-form-item-row label="密码">
                 <n-input v-model:value="userInfo.password" type="password" placeholder="请输入密码" clearable/>
@@ -34,7 +36,7 @@
           <n-tab-pane name="admin" tab="管理员登录">
             <n-form>
               <n-form-item-row label="用户名">
-                <n-input v-model:value="userInfo.account" placeholder="请输入账号" clearable />
+                <n-input v-model:value="userInfo.account" placeholder="请输入用户名" clearable />
               </n-form-item-row>
               <n-form-item-row label="密码">
                 <n-input v-model:value="userInfo.password" type="password" placeholder="请输入密码" clearable/>
@@ -92,16 +94,19 @@ import { reactive } from "vue";
 </script>
 <style scoped>
 .bg-img {
-  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  filter: blur(8px);
-  background: #fff0;
-  background-image: url("/src/assets/20200610113912817.jpg");
-  background-repeat: round;
+  background: #fff;
+}
+.bg-img img {
+  width: 1200px;
+  height: 593px;
 }
 .title {
   font-size: 2.8em;

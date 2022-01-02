@@ -1,12 +1,12 @@
 <template>
-    <n-gi class="card" @click="openModel">
+    <div class="card" @click="openModel">
         <div>
             <div class="card__icon">
                 <slot name="icon"></slot>
             </div>
             <div class="card__title">{{ props.title }}</div>
         </div>
-    </n-gi>
+    </div>
 
     <n-modal
         v-model:show="isShowModel"
@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import { NGi, NModal, NButton } from "naive-ui";
+import { NModal, NButton } from "naive-ui";
 const emits = defineEmit(["confirm", "openModel"]);
 const props = defineProps({
     title: {
