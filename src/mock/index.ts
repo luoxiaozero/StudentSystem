@@ -7,6 +7,25 @@ Mock.mock("/api/login", {
   },
 });
 
+Mock.mock("/api/teacher/login", {
+  code: 200,
+  data: {
+    token: "22222222222222222222222",
+  },
+});
+Mock.mock("/api/student/login", {
+  code: 200,
+  data: {
+    token: "22222222222222222222222",
+  },
+});
+Mock.mock("/api/admin/login", {
+  code: 200,
+  data: {
+    token: "22222222222222222222222",
+  },
+});
+
 Mock.mock("/api/sdept/create", {
   code: 200,
 });

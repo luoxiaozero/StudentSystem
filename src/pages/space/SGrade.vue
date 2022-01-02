@@ -30,11 +30,11 @@ axiosApi.get("/student/grade").then(res => {
     if (res.code == 200) {
         res.data.forEach((element: {
             courseName: string,
-            beginYear: number,
-            endYear: number,
+            beginDate: number,
+            endDate: number,
             grade: number
         }) => {
-            let date = new Date(element.beginYear);
+            let date = new Date(element.beginDate);
 
             grades.push({
                 courseName: element.courseName,
