@@ -1,6 +1,6 @@
 <template>
     <n-space style="margin-bottom: 8px;" justify="end">
-        <n-button type="info" strong secondary>工资详情下载</n-button>
+        <n-button type="info" strong secondary tag="a" href="/api/student/downallgrade" download>员工详情下载</n-button>
     </n-space>
     <n-data-table :columns="columns" :data="data" />
 </template>
