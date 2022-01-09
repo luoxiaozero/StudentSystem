@@ -43,11 +43,11 @@ axiosApi.get("/teacher/course").then(res => {
     if (res.code == 200) {
         res.data.forEach((element: {
             courseName: string,
-            beginYear: number,
-            endYear: number,
+            beginDate: number,
+            endDate: number,
             courseId: number;
         }) => {
-            let date = new Date(element.beginYear);
+            let date = new Date(element.beginDate);
             data.push({
                 courseId: element.courseId,
                 courseName: element.courseName,

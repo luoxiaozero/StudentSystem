@@ -28,7 +28,12 @@
                 <n-input v-model:value="userInfo.account" placeholder="请输入用户名" clearable />
               </n-form-item-row>
               <n-form-item-row label="密码">
-                <n-input v-model:value="userInfo.password" type="password" placeholder="请输入密码" clearable/>
+                <n-input
+                  v-model:value="userInfo.password"
+                  type="password"
+                  placeholder="请输入密码"
+                  clearable
+                />
               </n-form-item-row>
             </n-form>
             <n-button type="primary" block @click="login">登录</n-button>
@@ -39,7 +44,12 @@
                 <n-input v-model:value="userInfo.account" placeholder="请输入用户名" clearable />
               </n-form-item-row>
               <n-form-item-row label="密码">
-                <n-input v-model:value="userInfo.password" type="password" placeholder="请输入密码" clearable/>
+                <n-input
+                  v-model:value="userInfo.password"
+                  type="password"
+                  placeholder="请输入密码"
+                  clearable
+                />
               </n-form-item-row>
             </n-form>
             <n-button type="primary" block @click="login">登录</n-button>
@@ -59,6 +69,14 @@ import router from "../router";
 import axiosApi from "../axios";
 import store from "../store";
 store.userToken && router.push("/space");
+ref: isMobile = false;
+
+const ua = navigator.userAgent;
+const ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
+const isIphone =!ipad && !!ua.match(/(iPhone\sOS)\s([\d_]+)/);
+const isAndroid = !!ua.match(/(Android)\s+([\d.]+)/);
+isMobile = (isIphone || isAndroid) as boolean;
+
 const userInfo = reactive({
   type: "student",
   account: "",
@@ -78,7 +96,7 @@ const login = () => {
     showMessage("账号密码不能为空");
     return;
   }
-  axiosApi.post("/login", userInfo).then(res => {
+  axiosApi.post("/" + userInfo.type + "/login", userInfo).then(res => {
     if (res.code == 200) {
       store.userType = userInfo.type as any;
       store.userToken = res.data.token;
@@ -117,6 +135,28 @@ import { reactive } from "vue";
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.box > .n-card {
+  animation: box-a 2s;
+}
+@keyframes box-a {
+  0% {
+    transform: scale(0);
+    filter: blur(8px);
+  }
+  40% {
+    filter: blur(2px);
+  }
+  46% {
+    filter: blur(0);
+  }
+  70% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    
+  }
 }
 .box__message {
   height: 26px;

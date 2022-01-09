@@ -1,7 +1,7 @@
 <template>
     <n-layout-header class="nav" bordered>
         <div
-            style="position: fixed;top:0;bottom: 0;left: 0;right: 0;"
+            style="position: fixed;top:0;bottom: 0;left: 0;right: 0;z-index: 10;"
             v-if="showPopover"
             @click="showPopover = false"
         ></div>
@@ -12,7 +12,7 @@
             :show="showPopover"
         >
             <template #trigger>
-                <n-button text style="height: 54px;" class="nav__menu" @click="showPopover = true">
+                <n-button text style="height: 54px;" class="nav__menu" @click="showPopover = !showPopover">
                     <n-icon style="width: 40px;height: 20px;">
                         <menu-icon style="width: 20px;height: 20px;" />
                     </n-icon>
@@ -89,6 +89,19 @@ import store from "../store";
 import { theme } from '../store';
 import axiosApi from "../axios";
 ref: showPopover = false;
+let timer = false;
+window.onresize = () => {
+    if (!timer) {
+        if (document.body.clientWidth > 1000 && showPopover) {
+            showPopover = false;
+        }
+        timer = true;
+        setTimeout(() => {
+            timer = false;
+        }, 400)
+    }
+}
+
 const jumpSpace = () => {
     router.push("/space");
 }
